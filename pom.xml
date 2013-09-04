@@ -6,12 +6,12 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-   <url>TODO</url>
+   <url>https://github.com/rpelisse/vm-truck-loader</url>
    <licenses>
       <license>
          <name>GNU LESSER GENERAL PUBLIC LICENSE</name>
          <distribution>repo</distribution>
-         <url>TODO</url>
+         <url>http://www.gnu.org/licenses/lgpl-3.0.en.html</url>
       </license>
    </licenses>
 
