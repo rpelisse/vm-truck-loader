@@ -1,6 +1,8 @@
 Vm Truckloader
 ==============
 
+![Vm Truck Loader logo](src/site/resources/images/vm-truckloader-logo-alt.png)
+
 VmT Truckloader is a command line for VMWare VCenter that leverage the Managed Object API to
 automate bulk operation on VM. Parsing a simple CSV file, the tool can :
 - create VM based on a template, and execute a script after each creation
