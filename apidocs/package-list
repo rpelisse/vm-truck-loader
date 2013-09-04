@@ -1,0 +1,5 @@
+org.redhat.vmtruckloader.service
+org.redhat.vmtruckloader.service.cli
+org.redhat.vmtruckloader.util
+org.redhat.vmtruckloader.vmware
+org.redhat.vmtruckloader.vmware.action
