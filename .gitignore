@@ -1,0 +1,7 @@
+.classpath
+.project
+.ruleset
+.settings/
+cpd.xml
+pmd.xml
+target/
