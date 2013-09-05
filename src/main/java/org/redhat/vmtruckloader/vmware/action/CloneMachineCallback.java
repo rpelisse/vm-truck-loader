@@ -60,7 +60,7 @@ public class CloneMachineCallback extends AbstractVMWareActionCallback<MachineSp
 		this.sourceMachineName = sourceMachineName;
 		this.spec = machineSpecification;
 	}
-	
+
 	private VirtualMachineRelocateSpec buildRelocateSpec(ServiceInstance serviceInstance) {
 		VirtualMachineRelocateSpec relocateSpec = new VirtualMachineRelocateSpec();
 
@@ -71,10 +71,10 @@ public class CloneMachineCallback extends AbstractVMWareActionCallback<MachineSp
 			throw new IllegalArgumentException(mssg);
 		}
 		relocateSpec.pool = pool.getMOR();
-		
+
 		Datastore store = VMWareManagedObjectUtils.findDataStore(spec.getDatastoreName(), spec.getDiskSize(), serviceInstance);
 		relocateSpec.datastore = store.getMOR();
-		
+
 		return relocateSpec;
 	}
 
@@ -97,9 +97,9 @@ public class CloneMachineCallback extends AbstractVMWareActionCallback<MachineSp
 				nicSpec.setOperation(VirtualDeviceConfigSpecOperation.remove);
 				cloneSpec.getConfig().deviceChange[1] = nicSpec;
 			}
-		}			
+		}
 	}
-	
+
 	@Override
 	public MachineSpecification doInVmware(ServiceInstance serviceInstance) {
 		VirtualMachineRelocateSpec relocateSpec = buildRelocateSpec(serviceInstance);

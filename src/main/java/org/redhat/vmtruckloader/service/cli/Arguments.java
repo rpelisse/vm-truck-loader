@@ -29,8 +29,8 @@ import lombok.Data;
 import com.beust.jcommander.Parameter;
 
 /**
- * POJO to hold all the CLI arguments inputs. 
- * 
+ * POJO to hold all the CLI arguments inputs.
+ *
  * @author Romain Pelisse - romain@redhat.com
  *
  */
@@ -39,29 +39,29 @@ public class Arguments {
 
 	@Parameter(names = { "-s", "--server-url" }, description = "URL to vCenter", required = true)
 	private String vCenterURl;
-	
-	@Parameter(names = { "-u", "--username" }, description = "vCenter username", required = true)	
+
+	@Parameter(names = { "-u", "--username" }, description = "vCenter username", required = true)
 	private String username;
-	
+
 	@Parameter(names = { "-p", "--password" }, description = "vCenter password", required = true)
 	private String password;
-	
+
 	@Parameter(names = { "-a", "--action" }, description = "Action to perform", required = true, converter = ActionConverter.class)
 	private Action action;
-	
+
 	@Parameter(names = { "-l", "--line" }, description = "spec for one VM as a simple CSV line", required = false)
 	private String line;
-	
+
 	@Parameter(names = { "-f", "--file" }, description = "CSV file", required = false)
 	private File file;
-			
+
 	@Parameter(names = { "-t", "--template" }, description = "Name of the template to use - only valid for vm creation action", required = false)
 	private String templateName;
 
 	@Parameter(names = { "-e", "--post-exec" }, description = "Script to execute after VM creation - only valid for vm creation action", required = false)
 	private File postExec;
 
-	
+
 	@Parameter(names = { "-h", "--help" }, description = "print help text", required = false)
 	private boolean help;
 }

@@ -44,9 +44,9 @@ import com.beust.jcommander.ParameterException;
 
 /**
  * Main class for this tool:
- * Process the arguments, displays help text, and ensure the program 
+ * Process the arguments, displays help text, and ensure the program
  * exit with the appropriate error code
- * 
+ *
  * @author Romain Pelisse - <belaran@redhat.com>
  *
  */
@@ -58,7 +58,7 @@ public class VmTruckLoader {
 	private static final int INPUT_ERROR_NOFILE_NORLINE = 2;
 	private static final int PROGRAM_THROWN_EXCEPTION = 3;
 
-	
+
 	private static final boolean STACKTRACE_ENABLED = false;
 
 	public static void runWithCatch(String[] args) {
@@ -82,7 +82,7 @@ public class VmTruckLoader {
 			specs = new ArrayList<MachineSpecification>();
 			specs.add(turnLineIntoSpec(arguments.getLine()));
 		}
-		
+
 		Properties props = System.getProperties();
 		props.put("org.slf4j.simpleLogger.defaultLogLevel", "ERROR");
 		System.setProperties(props);
@@ -95,9 +95,9 @@ public class VmTruckLoader {
 			consolePrint("No machine specification found.");
 			System.exit(0);
 		}
-		
+
 		validatePostExecScript(arguments.getPostExec());
-		
+
 		for ( MachineSpecification spec : specs ) {
 			switch (arguments.getAction()) {
 			case CREATE:
@@ -106,57 +106,58 @@ public class VmTruckLoader {
 				spec = machineService.cloneMachine(arguments.getTemplateName(), spec);
 				spec.setMAC("@MAC");
 				consolePrint("- machine " + spec.getVmName() + " has been successfully created." );
-				consolePrint("-      with @MAC: " +	spec.getMAC());	
-				updateLineInCsvFile(arguments.getFile().getAbsolutePath(), spec);
+				consolePrint("-      with @MAC: " +	spec.getMAC());
+                if ( arguments.getFile() != null )
+				    updateLineInCsvFile(arguments.getFile().getAbsolutePath(), spec);
 				runPostExecScriptIfAny(arguments.getPostExec(), spec);
 				break;
 			case DELETE:
-				consolePrint("Deleting VM" + spec.getHostname());
+				consolePrint("Deleting VM: " + spec.getHostname());
 				machineService.deleteMachine(spec.getHostname());
 				break;
 			case START:
-				consolePrint("Starting VM" + spec.getHostname());
+				consolePrint("Starting VM: " + spec.getHostname());
 				machineService.startMachine(spec.getHostname());
 				break;
 			case STOP:
-				consolePrint("Stopping VM" + spec.getHostname());
+				consolePrint("Stopping VM: " + spec.getHostname());
 				machineService.stopMachine(spec.getHostname());
 				break;
 			case RESTART:
-				consolePrint("Restarting VM" + spec.getHostname());
+				consolePrint("Restarting VM: " + spec.getHostname());
 				machineService.stopMachine(spec.getHostname());
 				machineService.startMachine(spec.getHostname());
 				break;
-			case EDIT:				
-				consolePrint("Edit VM" + spec.getHostname());
+			case EDIT:
+				consolePrint("Edit VM: " + spec.getHostname());
 				machineService.editMachine(spec);
 				break;
 			default:
 				throw new IllegalStateException("Unrecognized action requested:" + arguments.getAction());
 			}
 		}
-	}	
-	
+	}
+
 	private static void runPostExecScriptIfAny(File postExec,
 			MachineSpecification spec) {
-		if ( postExec == null) return; 
+		if ( postExec == null) return;
 		for ( String line : executeScriptAndReturnsResult(buildCommandLine(postExec,spec)))
 			consolePrint(line);
 	}
 
 	private static String buildCommandLine(File postExec,
 			MachineSpecification spec) {
-		
-		return postExec.getAbsolutePath() + COMMAND_LINE_SEPARATOR + spec.getHostname() + COMMAND_LINE_SEPARATOR + 
+
+		return postExec.getAbsolutePath() + COMMAND_LINE_SEPARATOR + spec.getHostname() + COMMAND_LINE_SEPARATOR +
 				spec.getMAC() + COMMAND_LINE_SEPARATOR + spec.getRole() + COMMAND_LINE_SEPARATOR + spec.getRole();
 	}
 
 	private static void validatePostExecScript(File postExec) {
-		if ( postExec == null) return; 
+		if ( postExec == null) return;
 
 		if ( ! postExec.exists() )
 	      throw new IllegalArgumentException(postExec.getAbsolutePath() + " does not exist, and therefore can't be run ");
-		
+
 		if ( ! postExec.canExecute() )
 		      throw new IllegalArgumentException(postExec.getAbsolutePath() + " is not executable, and therefore can't be run ");
 	}
@@ -182,7 +183,7 @@ public class VmTruckLoader {
 	}
 
 	private static Arguments setDefaultValues(Arguments arguments) {
-		return arguments;		
+		return arguments;
 	}
 
 	private static void consolePrint(String string, boolean printCarriageReturn) {
@@ -191,7 +192,7 @@ public class VmTruckLoader {
 		else
 			System.out.print(string);	//NOPMD
 	}
-	
+
 	private static void consolePrint(String string) {
 		consolePrint(string, true);
 	}
