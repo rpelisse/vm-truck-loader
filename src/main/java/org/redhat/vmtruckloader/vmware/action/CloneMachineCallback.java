@@ -85,10 +85,12 @@ public class CloneMachineCallback extends AbstractVMWareActionCallback<MachineSp
 			LOGGER.debug("- cloneSpec:" +  cloneSpec.toString() );
 		}
 	}
-	
+
 	private void retrieveAndRemoveExistingEthernetCard(VirtualMachine sourceVm,VirtualMachineCloneSpec cloneSpec ) {
+        if ( sourceVm == null )
+            throw new IllegalArgumentException("SourceVM is 'null', can't clone VM");
 		for ( VirtualDevice device : sourceVm.getConfig().getHardware().getDevice() ) {
-			if ( LOGGER.isDebugEnabled() ) 
+			if ( LOGGER.isDebugEnabled() )
 				LOGGER.debug("Device found:" + device.getDeviceInfo().getLabel() + "[" + device.getClass() + "]");
 			if ( device instanceof VirtualEthernetCard )  {
 				VirtualEthernetCard nic = (VirtualEthernetCard) device;
