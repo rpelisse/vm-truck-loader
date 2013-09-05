@@ -58,6 +58,7 @@ public final class CSVUtils {
 		line[i++] = spec.getVLAN();
 		line[i++] = spec.getResourcePoolName();
 		line[i++] = spec.getDatastoreName();
+		line[i++] = spec.getFolder();
 		line[i++] = String.valueOf(spec.getNbCpu());
 		line[i++] = String.valueOf(spec.getVRAM());
 		return line;
@@ -72,6 +73,7 @@ public final class CSVUtils {
 		checkIfStringValid(spec.getVLAN(),VALIDATION_ERROR_MESSAGE_PREFIX +  "  no VLAN specified for VM " + spec.getVmName());
 		checkIfStringValid(spec.getResourcePoolName(),VALIDATION_ERROR_MESSAGE_PREFIX +  "  no Resource Pool name specified for VM " + spec.getVmName());
 		checkIfStringValid(spec.getDatastoreName(),VALIDATION_ERROR_MESSAGE_PREFIX +  "  no Datastore name specified for VM " + spec.getVmName());
+		checkIfStringValid(spec.getFolder(),VALIDATION_ERROR_MESSAGE_PREFIX +  "  no Folder name specified for VM " + spec.getVmName());
 		if ( spec.getNbCpu() <= 0 )
 			throw new IllegalArgumentException(VALIDATION_ERROR_MESSAGE_PREFIX +  "  invalid number of CPUs:" + spec.getNbCpu() + " specified for VM " + spec.getVmName());
 		if ( spec.getVRAM() <= 0 )
@@ -99,7 +101,7 @@ public final class CSVUtils {
 	public static MachineSpecification turnLineIntoSpec(String line) {
 		ColumnPositionMappingStrategy<MachineSpecification> strategy = new ColumnPositionMappingStrategy<MachineSpecification>();
 		strategy.setType(MachineSpecification.class);
-		String[] columns = new String[] {"env", "hostname", "role", "MAC", "ipAddress", "VLAN", "resourcePoolName", "datastoreName", "nbCpu", "vRAM", "diskSize"}; 
+		String[] columns = new String[] {"env", "hostname", "role", "MAC", "ipAddress", "VLAN", "resourcePoolName", "datastoreName", "folder", "nbCpu", "vRAM", "diskSize"}; 
 		strategy.setColumnMapping(columns);
 
 		CsvToBean<MachineSpecification> csv = new CsvToBean<MachineSpecification>();

@@ -23,12 +23,13 @@ package org.redhat.vmtruckloader.service;
 
 import lombok.Data;
 
-@Data
+
 /**
  * A simple POJO to hold the specification of a Virtual Machine.
  * @author Romain Pelisse - belaran@gmail.com
  *
  */
+@Data
 public class MachineSpecification {
 
 	public MachineSpecification() {}
@@ -44,6 +45,7 @@ public class MachineSpecification {
 	private String VLAN;
 	private String resourcePoolName;
 	private String datastoreName;
+	private String folder;
 	private int nbCpu;
 	private int vRAM;
 	private int diskSize = 20;

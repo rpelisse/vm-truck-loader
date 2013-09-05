@@ -117,8 +117,8 @@ public class CloneMachineCallback extends AbstractVMWareActionCallback<MachineSp
 		Task task;
 		try {
 			specDebugInfo(cloneSpec, sourceVm);
-			Folder setupFolder = VMWareManagedObjectUtils.lookVmFolder(serviceInstance, "SETUP");
-			
+			Folder setupFolder = VMWareManagedObjectUtils.lookVmFolder(serviceInstance, spec.getFolder());
+
 			task = sourceVm.cloneVM_Task(setupFolder, spec.getHostname(), cloneSpec);
 			LOGGER.debug("TaskKey = " + task.getTaskInfo().key);
 
