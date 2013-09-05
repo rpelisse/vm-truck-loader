@@ -22,3 +22,5 @@ This project has been released under the LGPL license by [Red Hat Gmbh](http://d
 logos comes from the [Open Clipart project](http://openclipart.org/), and have been designed by
 [Jarno Vasamaa](http://openclipart.org/detail/182972/truck-by-Jarno-182972) and
 [Muga](http://openclipart.org/detail/20711/forklift-truck-by-muga).
+
+Download the [latest release](https://github.com/rpelisse/vm-truck-loader/releases/download/1.0/vm-truck-loader-1.0-jar-with-dependencies.jar) from Github.

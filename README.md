@@ -19,6 +19,7 @@ setting up a complex classpath (it can therefore being packaged as RPM or MSI ea
 This project has been released under the LGPL license by Red Hat Gmbh.
 
 [Project Website (documentation)](http://rpelisse.github.com/vm-truck-loader/)
+Download the [latest release](https://github.com/rpelisse/vm-truck-loader/releases/download/1.0/vm-truck-loader-1.0-jar-with-dependencies.jar) from Github.
 
 Development Set Up
 ==================
