@@ -99,8 +99,8 @@ Data structure
 
 As explains on the introduction page of this website, the purpose of this project is to offer a simple mechanism to bulk commands to the vCenter. To do so, the tool only requires a simple CSV file structured with the following informations:
 
-    "env"; "hostname"; "role"; "MAC"; "ipAddress"; "VLAN"; "resourcePoolName"; "datastoreName"; "nbCpu"; "vRAM"; "diskSize"
-    DEV;newserver.domain.com; a web server;;192.168.1.1;VLAN;RP_NAME;DS_NAME;2;4;10
+    "env"; "hostname"; "role"; "MAC"; "ipAddress"; "VLAN"; "resourcePoolName"; "datastoreName"; "folder", "nbCpu"; "vRAM"; "diskSize"
+    DEV;newserver.domain.com; a web server;;192.168.1.1;VLAN;RP_NAME;DS_NAME;FOLDER;2;4;10
 
 Fields description:
 * env, a simple string to state to which environment (DEV,QA,...) the VM belong. This field is *not* used by the tool.
@@ -108,7 +108,7 @@ Fields description:
 * role, a field to describ the purpose of the VM, this value will end up in the VM annotation in vCenter
 * MAC, this field is not used by the tool, but, if requested to create a VM, it will update this entry with the MAC address of the created instance
 * ipAddress and VLAN are not used by the tool
-* resource pool name and datastore will be used when creating VM (action create) but ignored otherwise
+* resource pool name, datastore and folder will be used when creating VM (action create) but ignored otherwise
 * nbCpu, vRAM and diskSize are used during VM creation and VM edition
 
 One liner
