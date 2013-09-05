@@ -110,8 +110,8 @@ public class CloneMachineCallback extends AbstractVMWareActionCallback<MachineSp
 		cloneSpec.template = false;
 		cloneSpec.powerOn = false;
 		cloneSpec.location = relocateSpec;
-		cloneSpec.setConfig(VMWareMachineSpecsUtils.buildVmSpec(serviceInstance, this.spec));		
-		
+		cloneSpec.setConfig(VMWareMachineSpecsUtils.buildVmSpec(serviceInstance, this.spec));
+
 		VirtualMachine sourceVm = VMWareManagedObjectUtils.getVm(serviceInstance, sourceMachineName);
 		retrieveAndRemoveExistingEthernetCard(sourceVm, cloneSpec);
 		Task task;
@@ -125,7 +125,8 @@ public class CloneMachineCallback extends AbstractVMWareActionCallback<MachineSp
 			try {
 				String status = task.waitForTask();
 				if ( ! Task.SUCCESS.equals(status))
-					throw new IllegalStateException("Operation fails (status:" + status + ") - resulting clone, if any, may not be in a consistent state.");
+                    throw new IllegalStateException("Operation fails (status:" + status + ") - resulting clone, if any, may not be in a consistent state." +
+                            "Also checks if there is not already a VM called " + spec.getHostname());
 			} catch (InterruptedException ie) {
 				LOGGER.error("Interrupted while waiting for cloning of machine '" + sourceMachineName + "' to '"
 						+ spec.getHostname() + "' in resource pool '" + spec.getHostname() + "'.", ie);
